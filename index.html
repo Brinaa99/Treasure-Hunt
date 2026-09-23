@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Treasure Hunt — Tropical Island Math Adventure</title>
+  <meta name="description" content="Explore the tropical island adventure map, solve Standard 3 math challenges, unlock treasure chests and find the grand treasure!">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700;800;900&family=Outfit:wght@500;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="shared.css?v=retro2">
+  <link rel="stylesheet" href="style.css?v=retro2">
+</head>
+<body>
+  <div id="game-app">
+    <div id="game-container">
+      
+      <!-- Top Tropical Adventure HUD -->
+      <header id="game-hud" class="hud-panel">
+        <div class="hud-item hud-score">
+          <div class="hud-info">
+            <span class="hud-label">SCORE</span>
+            <span id="score-display" class="hud-value">0</span>
+          </div>
+        </div>
+
+        <div class="hud-item hud-lives">
+          <div class="hud-info">
+            <span class="hud-label">LIVES</span>
+            <div id="lives-container" class="lives-hearts" aria-label="3 lives remaining">
+              <span class="heart active">❤️</span>
+              <span class="heart active">❤️</span>
+              <span class="heart active">❤️</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="hud-item hud-timer">
+          <div class="hud-info">
+            <span class="hud-label">TIME</span>
+            <span id="timer-display" class="hud-value">60s</span>
+          </div>
+        </div>
+
+        <div class="hud-item hud-chests">
+          <div class="hud-info">
+            <span class="hud-label">CHESTS</span>
+            <span id="chest-display" class="hud-value">0 / 10</span>
+          </div>
+        </div>
+
+        <div class="hud-nav-actions">
+          <button id="profile-btn" class="hud-btn btn-profile" title="Explorer Profile" aria-label="Explorer Profile">
+            Profile
+          </button>
+          <button id="hud-how-to-play-btn" class="hud-btn" title="How to Play" aria-label="How to Play">
+            Rules
+          </button>
+          <button id="sound-toggle-btn" class="hud-btn" title="Toggle Sound" aria-label="Toggle Sound">
+            <span id="sound-icon">Sound</span>
+          </button>
+          <a href="index.html" class="hud-btn" title="Back to Numberland" aria-label="Back to Numberland">
+            Home
+          </a>
+        </div>
+      </header>
+
+      <!-- Tropical Island Adventure Canvas Viewport -->
+      <div class="canvas-viewport" id="canvas-viewport">
+        <canvas id="game-canvas" width="800" height="900"></canvas>
+      </div>
+
+      <!-- Animated Treasure Chest Challenge Modal Popup -->
+      <div id="challenge-modal" class="challenge-modal hidden">
+        <div class="chest-anim-box" id="chest-anim-box">
+          <div class="chest-sprite closed" id="chest-sprite">CHEST</div>
+        </div>
+
+        <div class="challenge-card-body">
+          <div class="challenge-location-tag" id="challenge-location-tag">ISLAND STEP 1 OF 10</div>
+          <div class="challenge-question" id="challenge-question">24 + 18 = ?</div>
+          <div class="challenge-hint" id="challenge-hint">Choose the correct answer to unlock the treasure!</div>
+
+          <!-- 3 Large Answer Choice Buttons -->
+          <div class="challenge-choices-grid" id="challenge-choices-container">
+            <!-- Dynamic 3 choices -->
+          </div>
+        </div>
+      </div>
+
+      <!-- START SCREEN OVERLAY -->
+      <div id="start-screen" class="overlay-screen active">
+        <div class="overlay-card start-card">
+          <div class="start-header-badge">STANDARD 3 MATH</div>
+          <h1 class="game-title">TREASURE<span class="title-highlight">HUNT</span></h1>
+          <p class="game-subtitle">Explore the island, solve math puzzles, unlock chests, and find the grand treasure!</p>
+
+          <div class="character-preview">
+            <div class="preview-tags">
+              <span class="chip">Addition &amp; Subtraction</span>
+              <span class="chip">Multiplication &amp; Division</span>
+              <span class="chip">Geometry &amp; Measurement</span>
+            </div>
+          </div>
+
+          <div class="action-buttons">
+            <button id="start-game-btn" class="arcade-btn btn-play">
+              PLAY
+            </button>
+            <button id="start-how-to-play-btn" class="arcade-btn btn-secondary">
+              HOW TO PLAY
+            </button>
+            <a href="index.html" class="arcade-btn btn-home">
+              BACK TO NUMBERLAND
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- HOW TO PLAY MODAL -->
+      <div id="instructions-modal" class="overlay-screen hidden">
+        <div class="overlay-card modal-card">
+          <div class="modal-header">
+            <h2>HOW TO PLAY</h2>
+            <button id="close-instructions-btn" class="close-btn" aria-label="Close instructions">✕</button>
+          </div>
+
+          <div class="instructions-grid">
+            <div class="instruction-box">
+              <div class="inst-icon">01</div>
+              <div class="inst-content">
+                <h3>Follow Island Trail</h3>
+                <p>Advance through 10 island stations across the archipelago to reach the grand treasure.</p>
+              </div>
+            </div>
+
+            <div class="instruction-box">
+              <div class="inst-icon">02</div>
+              <div class="inst-content">
+                <h3>Unlock Chests</h3>
+                <p>Solve each math challenge by choosing the right answer to open the treasure chest for <strong>+100 points</strong>!</p>
+              </div>
+            </div>
+
+            <div class="instruction-box">
+              <div class="inst-icon">03</div>
+              <div class="inst-content">
+                <h3>Protect Lives</h3>
+                <p>Wrong answers lock the chest and cost <strong>1 life</strong>. Keep your 3 lives safe.</p>
+              </div>
+            </div>
+
+            <div class="instruction-box">
+              <div class="inst-icon">04</div>
+              <div class="inst-content">
+                <h3>Find Grand Treasure</h3>
+                <p>Complete all 10 island challenges before the <strong>60s timer</strong> ends to win <strong>3 stars</strong>!</p>
+              </div>
+            </div>
+          </div>
+
+          <button id="start-from-instructions-btn" class="arcade-btn btn-play modal-play-btn">
+            START ADVENTURE!
+          </button>
+        </div>
+      </div>
+
+      <!-- END SCREEN OVERLAY (VICTORY / EXPEDITION COMPLETE) -->
+      <div id="end-screen" class="overlay-screen hidden">
+        <div class="overlay-card end-card">
+          <div class="result-badge victory" id="end-header-badge">EXPEDITION COMPLETE!</div>
+          <h2 id="end-title" class="end-title">TREASURE FOUND!</h2>
+          <p id="end-subtitle" class="end-subtitle">You solved all island challenges and conquered the archipelago!</p>
+
+          <div class="stars-awarded" id="stars-container">
+            <span class="star-slot" data-star="1">★</span>
+            <span class="star-slot" data-star="2">★</span>
+            <span class="star-slot" data-star="3">★</span>
+          </div>
+
+          <div class="score-summary-grid">
+            <div class="summary-box">
+              <span class="summary-label">FINAL SCORE</span>
+              <span id="final-score-val" class="summary-val highlight">1000</span>
+            </div>
+            <div class="summary-box">
+              <span class="summary-label">STARS EARNED</span>
+              <span id="final-stars-val" class="summary-val" style="color: #fbbf24;">3 / 3</span>
+            </div>
+            <div class="summary-box">
+              <span class="summary-label">CHALLENGES</span>
+              <span id="final-challenges-val" class="summary-val">10 / 10</span>
+            </div>
+            <div class="summary-box">
+              <span class="summary-label">TIME LEFT</span>
+              <span id="final-time-val" class="summary-val">28s</span>
+            </div>
+          </div>
+
+          <div class="end-actions">
+            <button id="play-again-btn" class="arcade-btn btn-play">
+              PLAY AGAIN
+            </button>
+            <a href="index.html" class="arcade-btn btn-home" id="back-home-btn">
+              BACK TO NUMBERLAND
+            </a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <script src="shared.js?v=retro3"></script>
+  <script src="game.js?v=retro3"></script>
+</body>
+</html>
