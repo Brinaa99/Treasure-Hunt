@@ -77,8 +77,18 @@
 
       <!-- INTERACTIVE ACTION TOOLBAR -->
       <footer class="island-action-bar" aria-label="Island Actions">
-        <button id="btn-clear-plot" class="island-action-btn btn-clear">CLEAR PLOT</button>
-        <button id="btn-unlock-chest" class="island-action-btn btn-unlock">UNLOCK CHEST</button>
+        <div class="tool-toggle-group">
+          <button id="tool-brush-btn" class="tool-btn active" title="Paint Tiles">
+            <span class="tool-icon">🖌️</span>
+            <span class="tool-label">PAINT</span>
+          </button>
+          <button id="tool-box-btn" class="tool-btn" title="Drag to Draw Rectangle">
+            <span class="tool-icon">⬚</span>
+            <span class="tool-label">BOX</span>
+          </button>
+        </div>
+        <button id="btn-clear-plot" class="island-action-btn btn-clear">CLEAR</button>
+        <button id="btn-unlock-chest" class="island-action-btn btn-unlock">UNLOCK CHEST 🗝️</button>
       </footer>
 
       <!-- MICRO-EXPLANATION HINT TOAST -->
@@ -100,7 +110,7 @@
           <h1 class="arcade-title">TREASURE<span class="title-pop">HUNT</span></h1>
           <div class="arcade-subtitle-pill">AREA &amp; PERIMETER GRID ISLAND</div>
           
-          <p class="arcade-desc">Explore tropical islands! Fill unit square plots (1 cm²) and place perimeter fence edges (1 cm) directly on ancient grid ruins to unlock pirate treasure chests.</p>
+          <p class="arcade-desc">Explore tropical islands! Drag to paint unit square plots (1 cm²) and enclose boundaries (1 cm) directly on ancient coordinate ruins to unlock pirate treasure chests.</p>
 
           <div class="arcade-actions">
             <button id="start-game-btn" class="arcade-btn btn-primary">START QUEST</button>
@@ -129,18 +139,18 @@
           <div class="instruction-cards-grid">
             <div class="inst-card">
               <div class="inst-step-num">1</div>
-              <div class="inst-card-title">READ MISSION</div>
-              <p>Check whether the island inscription requires Area (cm²) or Perimeter (cm).</p>
+              <div class="inst-card-title">DRAG TO PAINT</div>
+              <p>Drag across grid squares to plant garden plots or draw rectangles.</p>
             </div>
             <div class="inst-card">
               <div class="inst-step-num">2</div>
-              <div class="inst-card-title">TAP GRID TILES</div>
-              <p>Click squares on the 6&times;6 grid to plant unit tiles or build fence edges.</p>
+              <div class="inst-card-title">CHECK RULERS</div>
+              <p>Watch the real-time cm rulers and live Area / Perimeter formula brackets.</p>
             </div>
             <div class="inst-card">
               <div class="inst-step-num">3</div>
               <div class="inst-card-title">UNLOCK CHEST</div>
-              <p>Click Unlock Chest when your dimensions match to open the vault!</p>
+              <p>Match the target dimensions to turn the golden key and open the treasure!</p>
             </div>
           </div>
 
